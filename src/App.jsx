@@ -1,8 +1,21 @@
-import imgManAvatar from './assets/images/man-avatar.png'
-import imgWomanAvatar from './assets/images/woman-avatar.png'
-import { Avatar } from "./components/Avatar/Avatar"
+import imgManAvatar from './assets/images/man-avatar.png';
+import imgVisitante from './assets/images/visitante.png'
+import { Avatar } from "./components/Avatar/Avatar";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { NewProfile } from './pages/NewProfile';
+import { useState } from 'react';
+
+
 
 function App() {
+
+      //Mostrando janela de criar novo perfil ao clicar no buttan "adicionar perfil"
+      const [createProfile, setCreateProfile] = useState(false);
+
+      const createNewProfile = () => {
+            setCreateProfile(prevProfile => !prevProfile)
+      }
+
   return (
     <>
         <main className='bg-[#121214] w-screen h-screen'>
@@ -22,14 +35,19 @@ function App() {
                             nomeUsuario={"Pablo Anjos"}
                             />
                             <Avatar
-                            imgAvatar={imgWomanAvatar}
-                            nomeUsuario={"Maria"}
+                            imgAvatar={imgVisitante}
+                            nomeUsuario={"Visitante"}
                             />
                     </div>
 
                     <div className='flex justify-center -mt-5 xl:mt-20'>
-                          <button className='bg-[#181818] text-white font-semibold w-[312px] h-[54px] xl:w-[229px] xl:h-[59px] xl:text-lg hover:bg-pink-50'>Adicionar perfil</button>
+                          <button className='bg-[#181818] text-white font-semibold w-[312px] h-[54px] xl:w-[229px] xl:h-[59px] xl:text-lg hover:bg-[#202020] transition' onClick={createNewProfile}>Adicionar perfil</button> 
                     </div>
+              </div>
+
+            {/* Container New Profile */}
+              <div className='w-screen flex justify-center absolute top-[10%] xl:top-[20%]'>
+                  {createProfile && <NewProfile />} {/* Faz com que a janela aparecer ao clicar no botton "Adicionar perfil" */}
               </div>
         </main>
     </>
